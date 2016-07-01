@@ -259,10 +259,11 @@ JSONEditor.prototype = {
       self.validator = new JSONEditor.Validator(self,null,validator_options);
       
       // Create the root editor
-      var editor_class = self.getEditorClass(self.schema);
+      var schema = self.expandRefs(self.schema);
+      var editor_class = self.getEditorClass(schema);
       self.root = self.createEditor(editor_class, {
         jsoneditor: self,
-        schema: self.schema,
+        schema: schema,
         required: true,
         container: self.root_container
       });
@@ -1482,7 +1483,7 @@ JSONEditor.AbstractEditor = Class.extend({
         }
         first = path_parts.shift();
 
-        if(first === '#') first = self.jsoneditor.schema.id || 'root';
+        if(first === '#') first = self.jsoneditor.root.schema.id || 'root';
 
         // Find the root node for this template variable
         root = self.theme.closest(self.container,'[data-schemaid="'+first+'"]');
