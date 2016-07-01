@@ -106,7 +106,7 @@ JSONEditor.AbstractEditor = Class.extend({
         }
         first = path_parts.shift();
 
-        if(first === '#') first = self.jsoneditor.schema.id || 'root';
+        if(first === '#') first = self.jsoneditor.root.schema.id || 'root';
 
         // Find the root node for this template variable
         root = self.theme.closest(self.container,'[data-schemaid="'+first+'"]');
