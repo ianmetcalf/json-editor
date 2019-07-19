@@ -186,7 +186,7 @@ JSONEditor.defaults.editors.string = JSONEditor.AbstractEditor.extend({
 
     if(this.schema.readOnly || this.schema.readonly || this.schema.template) {
       this.always_disabled = true;
-      this.input.disabled = true;
+      this.input.setAttribute('readonly', 'true');
     }
 
     this.input
@@ -281,7 +281,9 @@ JSONEditor.defaults.editors.string = JSONEditor.AbstractEditor.extend({
     this._super();
   },
   disable: function() {
-    this.input.disabled = true;
+    if(!this.always_disabled) {
+      this.input.disabled = true;
+    }
     // TODO: WYSIWYG and Markdown editors
     this._super();
   },
