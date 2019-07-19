@@ -113,9 +113,15 @@ JSONEditor.defaults.themes.bootstrap3 = JSONEditor.AbstractTheme.extend({
     input.controlgroup.className = input.controlgroup.className.replace(/\s?has-error/g,'');
   },
   getTabHolder: function() {
-    var el = document.createElement('div');
-    el.innerHTML = "<div class='tabs list-group col-md-2'></div><div class='col-md-10'></div>";
+    const el = document.createElement('div');
+
+    el.innerHTML = '<div class="tabs list-group"></div><div></div>';
     el.className = 'rows';
+    el.style.display = 'flex';
+    el.children[0].style.flex = '0';
+    el.children[1].style.flex = '1 100%';
+    el.children[1].style.marginLeft = '10px';
+
     return el;
   },
   getTab: function(text) {
